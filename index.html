@@ -4,101 +4,111 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ārohan '26 Team Registration</title>
-    <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        /* Use Inter font */
         body {
             font-family: 'Inter', sans-serif;
+            /* This makes sure the form stays on top of the particles */
+            overflow: hidden; 
         }
-        /* Custom scrollbar for declaration box */
-        .declaration-box::-webkit-scrollbar {
-            width: 8px;
-        }
-        .declaration-box::-webkit-scrollbar-track {
-            background: #2d3748; /* bg-gray-800 */
-        }
-        .declaration-box::-webkit-scrollbar-thumb {
-            background: #4a5568; /* bg-gray-600 */
-            border-radius: 4px;
-        }
-        .declaration-box::-webkit-scrollbar-thumb:hover {
-            background: #718096; /* bg-gray-500 */
-        }
-    </style>
-    <!-- Import Inter font from Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-</head>
-<body class="bg-slate-900 text-gray-200 min-h-screen flex items-center justify-center p-4 py-12">
 
-    <div class="bg-slate-800 p-8 rounded-lg shadow-xl w-full max-w-2xl border border-slate-700">
-        <!-- Header -->
-        <div class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-white mb-2">Ārohan ’26</h1>
-            <p class="text-xl font-light text-indigo-300">Team Registration Form</p>
+        /* --- NEW: Particle Background Container --- */
+        #tsparticles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Puts it behind everything */
+            background-color: #0f172a; /* Dark slate background */
+        }
+
+        /* --- NEW: Pulse Animations --- */
+        @keyframes pulse-glow {
+            0%, 100% {
+                opacity: 1;
+                text-shadow: 0 0 10px rgba(224, 231, 255, 0.3);
+            }
+            50% {
+                opacity: 0.8;
+                text-shadow: 0 0 20px rgba(199, 210, 254, 0.7);
+            }
+        }
+        .animate-pulse-glow {
+            animation: pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse-button {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
+            }
+            70% {
+                transform: scale(1.02);
+                box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
+            }
+        }
+        .animate-pulse-button {
+            animation: pulse-button 2.5s infinite;
+        }
+
+        /* Custom scrollbar for declaration box */
+        .declaration-box::-webkit-scrollbar { width: 8px; }
+        .declaration-box::-webkit-scrollbar-track { background: #2d3748; }
+        .declaration-box::-webkit-scrollbar-thumb { background: #4a5568; border-radius: 4px; }
+        .declaration-box::-webkit-scrollbar-thumb:hover { background: #718096; }
+    </style>
+</head>
+<body class="text-gray-200 min-h-screen flex items-center justify-center p-4 py-12">
+
+    <div id="tsparticles"></div>
+
+    <div data-tilt data-tilt-glare data-tilt-max-glare="0.2" data-tilt-scale="1.01"
+         class="tilt-card bg-slate-800/80 backdrop-blur-lg p-8 rounded-lg shadow-2xl w-full max-w-2xl border border-slate-700 z-10 
+                overflow-y-auto" 
+         style="max-height: 90vh;"> <div class="text-center mb-8">
+            <h1 class="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-indigo-300 mb-2 animate-pulse-glow">
+                Ārohan ’26
+            </h1>
+            <p class="text-xl font-light text-indigo-200">Team Registration Form</p>
         </div>
 
-        <!-- Form Element -->
         <form id="fest-form" class="space-y-8">
 
-            <!-- Personal Details -->
             <fieldset class="space-y-6">
                 <legend class="text-lg font-semibold text-white border-b border-slate-600 pb-2 mb-4">Personal Details</legend>
-                
                 <div class="grid md:grid-cols-2 gap-6">
-                    <!-- Full Name (Required) -->
                     <div>
                         <label for="full_name" class="block text-sm font-medium text-gray-300 mb-1">Full Name <span class="text-red-400">*</span></label>
-                        <input type="text" id="full_name" name="full_name" required
-                            class="w-full p-3 bg-slate-700 border border-slate-600 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
-                            placeholder="Jane Doe">
+                        <input type="text" id="full_name" name="full_name" required class="w-full p-3 bg-slate-700 border border-slate-600 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition duration-200" placeholder="Jane Doe">
                     </div>
-
-                    <!-- Roll no. (Required) -->
                     <div>
                         <label for="roll_no" class="block text-sm font-medium text-gray-300 mb-1">Roll no. <span class="text-red-400">*</span></label>
-                        <input type="text" id="roll_no" name="roll_no" required
-                            class="w-full p-3 bg-slate-700 border border-slate-600 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
-                            placeholder="23BCE12345">
+                        <input type="text" id="roll_no" name="roll_no" required class="w-full p-3 bg-slate-700 border border-slate-600 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition duration-200" placeholder="23BCE12345">
                     </div>
                 </div>
-
                 <div class="grid md:grid-cols-2 gap-6">
-                    <!-- Email (Required) -->
                     <div>
                         <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email Address <span class="text-red-400">*</span></label>
-                        <input type="email" id="email" name="email" required
-                            class="w-full p-3 bg-slate-700 border border-slate-600 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
-                            placeholder="jane.doe@example.com">
+                        <input type="email" id="email" name="email" required class="w-full p-3 bg-slate-700 border border-slate-600 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition duration-200" placeholder="jane.doe@example.com">
                     </div>
-
-                    <!-- Contact Number (Required) -->
                     <div>
                         <label for="contact_number" class="block text-sm font-medium text-gray-300 mb-1">Contact Number <span class="text-red-400">*</span></label>
-                        <input type="tel" id="contact_number" name="contact_number" required
-                            class="w-full p-3 bg-slate-700 border border-slate-600 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
-                            placeholder="+91 98765 43210">
+                        <input type="tel" id="contact_number" name="contact_number" required class="w-full p-3 bg-slate-700 border border-slate-600 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition duration-200" placeholder="+91 98765 43210">
                     </div>
                 </div>
-
-                <!-- Batch/Year (Required) -->
                 <div>
                     <label for="batch_year" class="block text-sm font-medium text-gray-300 mb-1">Batch/Year of Study <span class="text-red-400">*</span></label>
-                    <input type="text" id="batch_year" name="batch_year" required
-                        class="w-full p-3 bg-slate-700 border border-slate-600 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
-                        placeholder="e.g., 2nd Year B.Tech CSE">
+                    <input type="text" id="batch_year" name="batch_year" required class="w-full p-3 bg-slate-700 border border-slate-600 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition duration-200" placeholder="e.g., 2nd Year B.Tech CSE">
                 </div>
             </fieldset>
 
-            <!-- Role Preferences -->
             <fieldset class="space-y-6">
                 <legend class="text-lg font-semibold text-white border-b border-slate-600 pb-2 mb-4">Role Preferences</legend>
-
-                <!-- Primary Role (Checkboxes) -->
                 <div>
                     <label class="block text-sm font-medium text-gray-300 mb-2">Which role are you primarily interested in? <span class="text-red-400">*</span></label>
                     <div class="grid sm:grid-cols-2 gap-x-6 gap-y-3">
-                        <!-- Checkbox Items -->
                         <div class="flex items-center"><input id="role_techno" name="primary_role" type="radio" value="Techno Team" class="h-4 w-4 text-indigo-500 bg-slate-700 border-slate-600 rounded focus:ring-indigo-500"><label for="role_techno" class="ml-3 block text-sm text-gray-300">TechFest' Team (CNC, Web, Data)</label></div>
                         <div class="flex items-center"><input id="role_outreach" name="primary_role" type="radio" value="Outreach, Marketing and PR" class="h-4 w-4 text-indigo-500 bg-slate-700 border-slate-600 rounded focus:ring-indigo-500"><label for="role_outreach" class="ml-3 block text-sm text-gray-300">Outreach, Marketing & PR</label></div>
                         <div class="flex items-center"><input id="role_sponsorship" name="primary_role" type="radio" value="Sponsorship Management" class="h-4 w-4 text-indigo-500 bg-slate-700 border-slate-600 rounded focus:ring-indigo-500"><label for="role_sponsorship" class="ml-3 block text-sm text-gray-300">Sponsorship Management</label></div>
@@ -112,36 +122,24 @@
                         <div class="flex items-center"><input id="role_merch" name="primary_role" type="radio" value="Merchandise" class="h-4 w-4 text-indigo-500 bg-slate-700 border-slate-600 rounded focus:ring-indigo-500"><label for="role_merch" class="ml-3 block text-sm text-gray-300">Merchandise</label></div>
                         <div class="flex items-center"><input id="role_security" name="primary_role" type="radio" value="Security Team" class="h-4 w-4 text-indigo-500 bg-slate-700 border-slate-600 rounded focus:ring-indigo-500"><label for="role_security" class="ml-3 block text-sm text-gray-300">Security Team</label></div>
                     </div>
-                    <!-- Other Option -->
                     <div class="flex items-center mt-3">
-                        <input id="role_other_check" name="primary_role" type="radio" value="Other"
-                            class="h-4 w-4 text-indigo-500 bg-slate-700 border-slate-600 rounded focus:ring-indigo-500">
+                        <input id="role_other_check" name="primary_role" type="radio" value="Other" class="h-4 w-4 text-indigo-500 bg-slate-700 border-slate-600 rounded focus:ring-indigo-500">
                         <label for="role_other_check" class="ml-3 block text-sm text-gray-300">Other:</label>
-                        <input type="text" id="primary_role_other" name="primary_role_other"
-                            class="flex-1 ml-2 p-2 bg-slate-700 border border-slate-600 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 disabled:bg-slate-800 disabled:text-gray-500"
-                            placeholder="Please specify" disabled>
+                        <input type="text" id="primary_role_other" name="primary_role_other" class="flex-1 ml-2 p-2 bg-slate-700 border border-slate-600 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 disabled:bg-slate-800 disabled:text-gray-500" placeholder="Please specify" disabled>
                     </div>
                 </div>
-
-                <!-- Open to other teams (Radio) -->
                 <div>
                     <label class="block text-sm font-medium text-gray-300 mb-2">Would you be open to working in another team if required? <span class="text-red-400">*</span></label>
                     <div class="flex flex-wrap gap-x-6 gap-y-2">
-                        <div class="flex items-center"><input id="open_yes" name="open_to_other_team" type="radio" value="Yes" required class="h-4 w-4 text-indigo-500 bg-slate-700 border-slate-600 focus:ring-indigo-500"><label for="open_yes" class="ml-3 block text-sm text-gray-300">Yes</label></div>
+                        <div class="flex items-center"><input id="open_yes" name="open_to_other_team" type="radio" value="Yes" required class="h-4 w-4 text-indigo-500 bg-slate-700 border-slate-600 focus:ring-indigo-500"><label for="open_yes" class="ml-3 block text-sm text-gray-300">Yes</Glabellabel></div>
                         <div class="flex items-center"><input id="open_no" name="open_to_other_team" type="radio" value="No" required class="h-4 w-4 text-indigo-500 bg-slate-700 border-slate-600 focus:ring-indigo-500"><label for="open_no" class="ml-3 block text-sm text-gray-300">No</label></div>
                         <div class="flex items-center"><input id="open_maybe" name="open_to_other_team" type="radio" value="Maybe" required class="h-4 w-4 text-indigo-500 bg-slate-700 border-slate-600 focus:ring-indigo-500"><label for="open_maybe" class="ml-3 block text-sm text-gray-300">Maybe</label></div>
                     </div>
                 </div>
-
-                <!-- Conditional "If YES" field -->
                 <div id="other-role-preference-wrapper" class="hidden">
                     <label for="other_role_preference" class="block text-sm font-medium text-gray-300 mb-1">If YES then please mention the role<span class="text-red-400">*</span></label> 
-                    <input type="text" id="other_role_preference" name="other_role_preference"
-                        class="w-full p-3 bg-slate-700 border border-slate-600 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
-                        placeholder="e.g., Hospitality, Logistics...">
+                    <input type="text" id="other_role_preference" name="other_role_preference" class="w-full p-3 bg-slate-700 border border-slate-600 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition duration-200" placeholder="e.g., Hospitality, Logistics...">
                 </div>
-
-                <!-- Role Type (Radio) -->
                 <div>
                     <label class="block text-sm font-medium text-gray-300 mb-2">Please indicate your preferred role type: <span class="text-red-400">*</span></label>
                     <div class="space-y-2">
@@ -151,40 +149,24 @@
                 </div>
             </fieldset>
             
-            <!-- Experience & Ideas -->
             <fieldset class="space-y-6">
                 <legend class="text-lg font-semibold text-white border-b border-slate-600 pb-2 mb-4">Experience & Ideas</legend>
-
-                <!-- Experience Statement (Textarea) -->
                 <div>
                     <label for="experience_statement" class="block text-sm font-medium text-gray-300 mb-1">Please provide a brief statement of your relevant experience or skills for your chosen role(s). <span class="text-red-400">*</span></label>
-                    <textarea id="experience_statement" name="experience_statement" rows="4" required
-                        class="w-full p-3 bg-slate-700 border border-slate-600 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
-                        placeholder="e.g., 'I have experience in React and Node.js for the Techno Team...'"></textarea>
+                    <textarea id="experience_statement" name="experience_statement" rows="4" required class="w-full p-3 bg-slate-700 border border-slate-600 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition duration-200" placeholder="e.g., 'I have experience in React and Node.js for the Techno Team...'"></textarea>
                 </div>
-
-                <!-- Prior Experience (Textarea) -->
                 <div>
                     <label for="prior_experience" class="block text-sm font-medium text-gray-300 mb-1">Do you have any prior experience in organizing college events or fests? <span class="text-red-400">*</span></label>
-                    <textarea id="prior_experience" name="prior_experience" rows="3" required
-                        class="w-full p-3 bg-slate-700 border border-slate-600 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
-                        placeholder="e.g., 'Yes, I was part of the logistics team for my previous college fest...' or 'No, this is my first time.'"></textarea>
+                    <textarea id="prior_experience" name="prior_experience" rows="3" required class="w-full p-3 bg-slate-700 border border-slate-600 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition duration-200" placeholder="e.g., 'Yes, I was part of the logistics team for my previous college fest...' or 'No, this is my first time.'"></textarea>
                 </div>
-
-                <!-- Ideas (Textarea) -->
                 <div>
                     <label for="ideas" class="block text-sm font-medium text-gray-300 mb-1">What ideas do you have to make Ārohan ’26 grander and more exciting for everyone?</label>
-                    <textarea id="ideas" name="ideas" rows="4"
-                        class="w-full p-3 bg-slate-700 border border-slate-600 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
-                        placeholder="Share your creative ideas!"></textarea>
+                    <textarea id="ideas" name="ideas" rows="4" class="w-full p-3 bg-slate-700 border border-slate-600 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition duration-200" placeholder="Share your creative ideas!"></textarea>
                 </div>
             </fieldset>
 
-            <!-- Commitment & Skills -->
             <fieldset class="space-y-6">
                 <legend class="text-lg font-semibold text-white border-b border-slate-600 pb-2 mb-4">Commitment & Skills</legend>
-
-                <!-- Organizational Skills (Linear Scale) -->
                 <div>
                     <label class="block text-sm font-medium text-gray-300 mb-2">On a scale of 1 to 5, how would you rate your organizational skills? <span class="text-red-400">*</span></label>
                     <div class="flex justify-between items-center text-sm text-gray-400 px-1">
@@ -199,8 +181,6 @@
                         <span>Excellent</span>
                     </div>
                 </div>
-
-                <!-- Time Commitment (Radio) -->
                 <div>
                     <label class="block text-sm font-medium text-gray-300 mb-2">Are you willing to commit a significant amount of time to fest preparations? <span class="text-red-400">*</span></label>
                     <div class="flex gap-x-6">
@@ -210,50 +190,122 @@
                 </div>
             </fieldset>
 
-            <!-- Declaration -->
             <fieldset>
                 <legend class="text-lg font-semibold text-white border-b border-slate-600 pb-2 mb-4">Declaration <span class="text-red-400">*</span></legend>
-                
-                <!-- Scrollable Text Box -->
                 <div class="declaration-box bg-slate-900 border border-slate-700 rounded-md p-4 max-h-40 overflow-y-auto space-y-3 text-sm text-gray-300">
                     <p>I hereby declare that all the information provided above is true to the best of my knowledge.</p>
                     <p>I understand that being part of the fest organizing team requires commitment, teamwork, and responsibility.</p>
                     <p>If selected, I agree to actively contribute to my assigned team and adhere to the guidelines set by the organizing committee.</p>
                     <p>I understand that if my performance or conduct is found unsatisfactory, I may be removed from the team. The final decision in all such matters will rest with the convenors. I agree to follow all instructions, report to the convenors as required, and maintain professional conduct at all times. Any instance of misconduct or violation of guidelines may lead to disciplinary action and restriction from future activities.</p>
                 </div>
-                
-                <!-- Agreement Checkbox -->
                 <div class="mt-4 flex items-center">
-                    <input id="declaration_agree" name="declaration_agree" type="checkbox" value="Agreed" required
-                        class="h-4 w-4 text-indigo-500 bg-slate-700 border-slate-600 rounded focus:ring-indigo-500">
+                    <input id="declaration_agree" name="declaration_agree" type="checkbox" value="Agreed" required class="h-4 w-4 text-indigo-500 bg-slate-700 border-slate-600 rounded focus:ring-indigo-500">
                     <label for="declaration_agree" class="ml-3 block text-sm text-gray-300">I have read and agree to the above declaration.</label>
                 </div>
             </fieldset>
 
-            <!-- Submit Button -->
             <div>
                 <button type="submit" id="submit-button"
-                    class="w-full bg-indigo-600 text-white py-3 px-4 rounded-md font-semibold hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-slate-800 transition duration-200 disabled:bg-slate-600">
+                    class="w-full bg-indigo-600 text-white py-3 px-4 rounded-md font-semibold hover:bg-indigo-500 
+                           focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-slate-800 
+                           transition-all duration-300 transform hover:-translate-y-0.5
+                           disabled:bg-slate-600 disabled:shadow-none disabled:transform-none
+                           animate-pulse-button">
                     Register Now
                 </button>
             </div>
         </form>
 
-        <!-- Success Message -->
         <div id="success-message" class="hidden mt-6 p-4 bg-green-800 text-green-100 border border-green-600 rounded-md">
             <strong>Registration successful!</strong> Welcome to the Ārohan '26 team. We'll be in touch soon!
         </div>
 
-        <!-- Error Message -->
         <div id="error-message" class="hidden mt-6 p-4 bg-red-800 text-red-100 border border-red-600 rounded-md">
             <strong>Error!</strong> Something went wrong. Please check your inputs or try again later.
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+
+    <script>
+        // Initialize the 3D Tilt effect
+        VanillaTilt.init(document.querySelector(".tilt-card"), {
+            max: 10,     // Max tilt angle
+            speed: 400,  // Tilt speed
+            glare: true, // Add a glare effect
+            "max-glare": 0.2 // Glare intensity
+        });
+
+        // Initialize the Particle background
+        tsParticles.load("tsparticles", {
+            fpsLimit: 60,
+            interactivity: {
+                events: {
+                    onHover: {
+                        enable: true,
+                        mode: "repulse", // Pushes particles away
+                    },
+                    resize: true,
+                },
+                modes: {
+                    repulse: {
+                        distance: 100,
+                        duration: 0.4,
+                    },
+                },
+            },
+            particles: {
+                color: {
+                    value: "#a5b4fc", // Indigo-200
+                },
+                links: {
+                    color: "#4f46e5", // Indigo-600
+                    distance: 150,
+                    enable: true,
+                    opacity: 0.5,
+                    width: 1,
+                },
+                collisions: {
+                    enable: true,
+                },
+                move: {
+                    direction: "none",
+                    enable: true,
+                    outModes: {
+                        default: "bounce",
+                    },
+                    random: false,
+                    speed: 2,
+                    straight: false,
+                },
+                number: {
+                    density: {
+                        enable: true,
+                        area: 800,
+                    },
+                    value: 80,
+                },
+                opacity: {
+                    value: 0.5,
+                },
+                shape: {
+                    type: "circle",
+                },
+                size: {
+                    value: { min: 1, max: 5 },
+                },
+            },
+            detectRetina: true,
+        });
+    </script>
+    
     <script>
         // --- STEP 1: PASTE YOUR WEB APP URL HERE ---
-        // You will get this URL after following the instructions.md file
-        const WEB_APP_URL = 'https://script.google.com/a/macros/iiserb.ac.in/s/AKfycbwNJvCHVs08YPntB3cOo5hdlnHNe6YR_qtSvXU4q8hSDVPqg89N9lDRXG5ZpE7IArrk/exec';
+        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwNJvCHVs08YPntB3cOo5hdlnHNe6YR_qtSvXU4q8hSDVPqg89N9lDRXG5ZpE7IArrk/exec';
+        // --- (Make sure this URL is correct!) ---
+
 
         // --- STEP 2: JavaScript to handle form submission and logic ---
         const form = document.getElementById('fest-form');
@@ -271,7 +323,7 @@
                 otherRoleText.focus();
             } else {
                 otherRoleText.disabled = true;
-                otherRoleText.value = ''; // Clear the text if unchecked
+                otherRoleText.value = '';
             }
         });
 
@@ -286,7 +338,7 @@
                 otherRoleWrapper.classList.remove('hidden');
             } else {
                 otherRoleWrapper.classList.add('hidden');
-                document.getElementById('other_role_preference').value = ''; // Clear value
+                document.getElementById('other_role_preference').value = '';
             }
         }
         openYes.addEventListener('change', toggleOtherRoleField);
@@ -296,9 +348,8 @@
 
         // Form submission logic
         form.addEventListener('submit', (e) => {
-            e.preventDefault(); // Prevent default form submission
+            e.preventDefault(); 
 
-            // Check if the URL has been changed
             if (WEB_APP_URL === 'PASTE_YOUR_GOOGLE_SCRIPT_WEB_APP_URL_HERE') {
                 errorMessage.textContent = 'Error: Please update the WEB_APP_URL in the HTML file first.';
                 errorMessage.classList.remove('hidden');
@@ -306,15 +357,14 @@
                 return;
             }
 
-            // Show loading state
             submitButton.disabled = true;
             submitButton.textContent = 'Submitting...';
+            submitButton.classList.remove('animate-pulse-button'); // Stop pulse on submit
             successMessage.classList.add('hidden');
             errorMessage.classList.add('hidden');
 
             const formData = new FormData(form);
 
-            // Send data to Google Apps Script
             fetch(WEB_APP_URL, {
                 method: 'POST',
                 body: formData
@@ -322,28 +372,24 @@
             .then(response => response.json())
             .then(data => {
                 if (data.result === 'success') {
-                    // Show success
                     successMessage.classList.remove('hidden');
-                    form.reset(); // Clear the form
-                    // Re-disable conditional fields
+                    form.reset(); 
                     otherRoleText.disabled = true; 
                     otherRoleWrapper.classList.add('hidden');
                 } else {
-                    // Show error
                     errorMessage.textContent = data.message || 'An unknown error occurred.';
                     errorMessage.classList.remove('hidden');
                 }
             })
             .catch(error => {
-                // Show network or script error
                 console.error('Error:', error);
                 errorMessage.textContent = 'Error submitting form. Please check the console.';
                 errorMessage.classList.remove('hidden');
             })
             .finally(() => {
-                // Restore button
                 submitButton.disabled = false;
                 submitButton.textContent = 'Register Now';
+                submitButton.classList.add('animate-pulse-button'); // Re-add pulse
             });
         });
     </script>
